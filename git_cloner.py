@@ -49,6 +49,7 @@ class RepoParser:
     def extract_elements(self, node, source_code):
         """Extract specific elements from an AST node."""
         elements = {
+            'keywords': [],
             'identifiers': [],
             'comments': [],
             'keywords': [],
@@ -59,6 +60,8 @@ class RepoParser:
         
         def visit_node(node):
             # Handle different node types based on language
+            if node.type == 'keyword':
+                elements['keywords'].append(node.text.decode('utf8'))
             if node.type == 'identifier':
                 elements['identifiers'].append(node.text.decode('utf8'))
             elif node.type in ('comment', 'line_comment', 'block_comment'):
@@ -128,7 +131,7 @@ def main():
     
     # Example repositories to parse
     repos = [
-        "https://github.com/runelite/runelite",
+        "https://github.com/leifengwl/MoGuDing-Auto",
     ]
     
     for repo_url in repos:
@@ -150,8 +153,11 @@ def main():
                     print(f"Language: {result['language']}")
                     elements = result['elements']
                     print(f"Found:")
+                    print(f"- {len(elements['keywords'])} keywords")
                     print(f"- {len(elements['identifiers'])} identifiers")
+                    print(f"- {(elements['identifiers'])} identifiers")
                     print(f"- {len(elements['comments'])} comments")
+                    print(f"- {(elements['comments'])} comments")
                     print(f"- {len(elements['literals'])} literals")
                     print(f"- {len(elements['classes'])} classes")
                     print(f"- {len(elements['functions'])} functions")
