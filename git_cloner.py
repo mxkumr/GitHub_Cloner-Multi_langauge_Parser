@@ -21,12 +21,28 @@ class RepoParser:
             
             # Remove existing repo if it exists
             if os.path.exists(repo_path):
-                shutil.rmtree(repo_path)
+                try:
+                    shutil.rmtree(repo_path)
+                except PermissionError:
+                    print(f"Permission error while removing {repo_path}")
+                    print("Please try:")
+                    print(f"1. Close any programs that might be using files in {repo_path}")
+                    print("2. Run this script with administrator privileges")
+                    return None
             
             # Clone the repository
             print(f"Cloning {repo_url}...")
-            git.Repo.clone_from(repo_url, repo_path)
-            return repo_path
+            try:
+                repo = git.Repo.clone_from(repo_url, repo_path)
+                print(f"Successfully cloned to {repo_path}")
+                return repo_path
+            except git.exc.GitCommandError as e:
+                print(f"Git command error: {str(e)}")
+                return None
+            except PermissionError as e:
+                print(f"Permission error while cloning: {str(e)}")
+                print("Please try running the script with administrator privileges")
+                return None
         except Exception as e:
             print(f"Error cloning repository: {str(e)}")
             return None
@@ -49,35 +65,120 @@ class RepoParser:
     def extract_elements(self, node, source_code):
         """Extract specific elements from an AST node."""
         elements = {
-            'keywords': [],
-            'identifiers': [],
+            'keywords_argument': [],
+            'identifiers': set(),  # Changed to set to track unique identifiers
             'comments': [],
-            'keywords': [],
             'literals': [],
-            'classes': [],
-            'functions': []
+            'classes': set(),  # Using a set to avoid duplicates
+            'functions': [],
+            'variables': set(),  # Track variables
+            'docstrings': []    # Track docstrings
         }
         
+        # Keep track of all unique node types we see
+        seen_node_types = set()
+        
+        def is_docstring(node):
+            """Helper function to determine if a node is a docstring."""
+            if not node.type == 'expression_statement':
+                return False
+            
+            # Must have a string as first child
+            if not (node.children and node.children[0].type in ('string', 'string_literal')):
+                return False
+            
+            # Must be first statement in its parent block
+            parent = node.parent
+            if not parent:
+                return False
+            
+            if parent.type == 'module':
+                # For modules, must be the first statement
+                return parent.children[0] == node
+            elif parent.type == 'block':
+                # For blocks, parent's parent must be class or function definition
+                grand_parent = parent.parent
+                if not grand_parent or grand_parent.type not in ('class_definition', 'function_definition'):
+                    return False
+                # Must be first statement in the block
+                return parent.children[0] == node
+            
+            return False
+        
         def visit_node(node):
+            # Track unique node types
+            #seen_node_types.add(node.type)
+            
             # Handle different node types based on language
-            if node.type == 'keyword':
-                elements['keywords'].append(node.text.decode('utf8'))
+            if node.type == 'keyword_argument':
+                elements['keywords_argument'].append(node.text.decode('utf8'))
             if node.type == 'identifier':
-                elements['identifiers'].append(node.text.decode('utf8'))
+                elements['identifiers'].add(node.text.decode('utf8'))  # Changed to add() for set
             elif node.type in ('comment', 'line_comment', 'block_comment'):
                 elements['comments'].append(node.text.decode('utf8'))
             elif node.type in ('string_literal', 'number_literal', 'string', 'number'):
                 elements['literals'].append(node.text.decode('utf8'))
-            elif node.type in ('class_definition', 'class_declaration', 'class'):
-                elements['classes'].append(node.text.decode('utf8'))
+            elif node.type in ('class_definition', 'class_declaration', 'class', 'class_specifier'):
+                # For classes, only store the class name from the identifier node
+                for child in node.children:
+                    if child.type == 'identifier':
+                        elements['classes'].add(child.text.decode('utf8'))
+                        break  # Only get the first identifier (class name)
             elif node.type in ('function_definition', 'method_definition', 'function_declaration', 'method_declaration'):
                 elements['functions'].append(node.text.decode('utf8'))
+            
+            # Variable detection
+            elif node.type == 'assignment':
+                # Get the left side of the assignment
+                if node.children:
+                    left_side = node.children[0]
+                    if left_side.type == 'identifier':
+                        elements['variables'].add(left_side.text.decode('utf8'))
+                    elif left_side.type == 'attribute':
+                        # Handle attribute assignments (e.g., self.var = ...)
+                        for child in left_side.children:
+                            if child.type == 'identifier':
+                                elements['variables'].add(child.text.decode('utf8'))
+            elif node.type == 'global_statement':
+                # Get global variables
+                for child in node.children:
+                    if child.type == 'identifier':
+                        elements['variables'].add(child.text.decode('utf8'))
+            elif node.type == 'augmented_assignment':
+                # Get variables from augmented assignments (+=, -=, etc.)
+                if node.children:
+                    left_side = node.children[0]
+                    if left_side.type == 'identifier':
+                        elements['variables'].add(left_side.text.decode('utf8'))
+            elif node.type == 'for_statement':
+                # Get loop variables
+                if node.children:
+                    target = node.children[1]  # The loop variable is typically the second child
+                    if target.type == 'identifier':
+                        elements['variables'].add(target.text.decode('utf8'))
+            
+            # Docstring detection
+            elif is_docstring(node):
+                docstring = node.children[0].text.decode('utf8')
+                # Remove common string delimiters
+                docstring = docstring.strip('"""').strip("'''").strip('"').strip("'")
+                elements['docstrings'].append(docstring)
             
             # Recursively visit all children
             for child in node.children:
                 visit_node(child)
         
         visit_node(node)
+        
+        # # Print all unique node types we found
+        # print("\nAll node types found:")
+        # for node_type in sorted(seen_node_types):
+        #     print(f"- {node_type}")
+        
+        # Convert sets back to lists for consistent interface
+        elements['classes'] = list(elements['classes'])
+        elements['variables'] = list(elements['variables'])
+        elements['identifiers'] = list(elements['identifiers'])  # Convert identifiers set to list
         return elements
 
     def parse_file(self, file_path):
@@ -129,6 +230,30 @@ class RepoParser:
 def main():
     parser = RepoParser()
     
+    # # Test local file first
+    # print("\nTesting local file:")
+    # result = parser.parse_file("test_files/test_with_docstrings.py")
+    # if result['success']:
+    #     print(f"\nFile: test_with_docstrings.py")
+    #     print(f"Language: {result['language']}")
+    #     elements = result['elements']
+    #     print(f"Found:")
+    #     print(f"- {len(elements['keywords_argument'])} keywords_argument")
+    #     print(f"- {len(elements['identifiers'])} unique identifiers")
+    #     print(f"Identifiers found: {sorted(elements['identifiers'])}")
+    #     print(f"- {len(elements['comments'])} comments")
+    #     print(f"- {len(elements['literals'])} literals")
+    #     print(f"- {len(elements['classes'])} classes")
+    #     print(f"- {len(elements['functions'])} functions")
+    #     print(f"- {len(elements['variables'])} variables")
+    #     if elements['variables']:
+    #         print(f"Variables found: {sorted(elements['variables'])}")
+    #     print(f"- {len(elements['docstrings'])} docstrings")
+    #     if elements['docstrings']:
+    #         print("Docstrings found:")
+    #         for ds in elements['docstrings']:
+    #             print(f"  - {ds}")
+    
     # Example repositories to parse
     repos = [
         "https://github.com/leifengwl/MoGuDing-Auto",
@@ -153,14 +278,22 @@ def main():
                     print(f"Language: {result['language']}")
                     elements = result['elements']
                     print(f"Found:")
-                    print(f"- {len(elements['keywords'])} keywords")
-                    print(f"- {len(elements['identifiers'])} identifiers")
-                    print(f"- {(elements['identifiers'])} identifiers")
+                    print(f"- {len(elements['keywords_argument'])} keywords_argument")
+                    print(f"- {len(elements['identifiers'])} unique identifiers")
+                    print(f"Identifiers found: {sorted(elements['identifiers'])}")
                     print(f"- {len(elements['comments'])} comments")
-                    print(f"- {(elements['comments'])} comments")
+                    # print(f"- {(elements['comments'])} comments")
                     print(f"- {len(elements['literals'])} literals")
                     print(f"- {len(elements['classes'])} classes")
                     print(f"- {len(elements['functions'])} functions")
+                    print(f"- {len(elements['variables'])} variables")
+                    if elements['variables']:
+                        print(f"Variables found: {sorted(elements['variables'])}")
+                    print(f"- {len(elements['docstrings'])} docstrings")
+                    if elements['docstrings']:
+                        print("Docstrings found:")
+                        for ds in elements['docstrings']:
+                            print(f"  - {ds}")
 
 if __name__ == "__main__":
     main()
