@@ -230,29 +230,39 @@ class RepoParser:
 def main():
     parser = RepoParser()
     
-    # # Test local file first
-    # print("\nTesting local file:")
-    # result = parser.parse_file("test_files/test_with_docstrings.py")
-    # if result['success']:
-    #     print(f"\nFile: test_with_docstrings.py")
-    #     print(f"Language: {result['language']}")
-    #     elements = result['elements']
-    #     print(f"Found:")
-    #     print(f"- {len(elements['keywords_argument'])} keywords_argument")
-    #     print(f"- {len(elements['identifiers'])} unique identifiers")
-    #     print(f"Identifiers found: {sorted(elements['identifiers'])}")
-    #     print(f"- {len(elements['comments'])} comments")
-    #     print(f"- {len(elements['literals'])} literals")
-    #     print(f"- {len(elements['classes'])} classes")
-    #     print(f"- {len(elements['functions'])} functions")
-    #     print(f"- {len(elements['variables'])} variables")
-    #     if elements['variables']:
-    #         print(f"Variables found: {sorted(elements['variables'])}")
-    #     print(f"- {len(elements['docstrings'])} docstrings")
-    #     if elements['docstrings']:
-    #         print("Docstrings found:")
-    #         for ds in elements['docstrings']:
-    #             print(f"  - {ds}")
+    # # Test files
+    # test_files = [
+    #     "test_files/test_with_docstrings.py",
+    #     "test_files/test_chinese.py"
+    # ]
+    
+    # for test_file in test_files:
+    #     print(f"\nTesting file: {test_file}")
+    #     result = parser.parse_file(test_file)
+    #     if result['success']:
+    #         print(f"\nFile: {os.path.basename(test_file)}")
+    #         print(f"Language: {result['language']}")
+    #         elements = result['elements']
+    #         print(f"Found:")
+    #         print(f"- {len(elements['keywords_argument'])} keywords_argument")
+    #         print(f"- {len(elements['identifiers'])} unique identifiers")
+    #         print(f"Identifiers found: {sorted(elements['identifiers'])}")
+    #         print(f"- {len(elements['comments'])} comments")
+    #         print(f"- {len(elements['literals'])} literals")
+    #         print(f"- {len(elements['classes'])} classes")
+    #         if elements['classes']:
+    #             print(f"Classes found: {sorted(elements['classes'])}")
+    #         print(f"- {len(elements['functions'])} functions")
+    #         if elements['functions']:
+    #             print(f"Functions found: {sorted(elements['functions'])}")
+    #         print(f"- {len(elements['variables'])} variables")
+    #         if elements['variables']:
+    #             print(f"Variables found: {sorted(elements['variables'])}")
+    #         print(f"- {len(elements['docstrings'])} docstrings")
+    #         if elements['docstrings']:
+    #             print("Docstrings found:")
+    #             for ds in elements['docstrings']:
+    #                 print(f"  - {ds}")
     
     # Example repositories to parse
     repos = [
@@ -296,4 +306,8 @@ def main():
                             print(f"  - {ds}")
 
 if __name__ == "__main__":
+    # Only try to clean up if the directory exists
+    if os.path.exists("cloned_repos"):
+        shutil.rmtree("cloned_repos")
     main()
+#Output in JSON format
