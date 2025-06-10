@@ -1,0 +1,321 @@
+{
+  "repository_url": "test_files/test_with_docstrings.py",
+  "total_files_analyzed": 1,
+  "summary": {
+    "element_counts": {
+      "identifiers": {
+        "total": 14,
+        "non_english": 0,
+        "language_distribution": {
+          "en": 14
+        }
+      },
+      "comments": {
+        "total": 1,
+        "non_english": 0,
+        "language_distribution": {
+          "en": 1
+        }
+      },
+      "literals": {
+        "total": 10,
+        "non_english": 1,
+        "language_distribution": {
+          "en": 9,
+          "nl": 1
+        }
+      },
+      "classes": {
+        "total": 1,
+        "non_english": 0,
+        "language_distribution": {
+          "en": 1
+        }
+      },
+      "functions": {
+        "total": 3,
+        "non_english": 1,
+        "language_distribution": {
+          "nl": 1,
+          "en": 2
+        }
+      },
+      "variables": {
+        "total": 9,
+        "non_english": 0,
+        "language_distribution": {
+          "en": 9
+        }
+      },
+      "docstrings": {
+        "total": 5,
+        "non_english": 1,
+        "language_distribution": {
+          "en": 4,
+          "nl": 1
+        }
+      }
+    }
+  },
+  "detailed_elements": {
+    "identifiers": {
+      "english_instances": [
+        "class_var",
+        "TestClass",
+        "instance_var",
+        "method",
+        "range",
+        "global_var",
+        "local_var",
+        "_private_var",
+        "__init__",
+        "result",
+        "self",
+        "i",
+        "standalone_function",
+        "another_global"
+      ],
+      "non_english_instances": []
+    },
+    "comments": {
+      "english_instances": [
+        "# Global variables"
+      ],
+      "non_english_instances": []
+    },
+    "literals": {
+      "english_instances": [
+        "\"\"\"This is a module level docstring.\"\"\"",
+        "\"test\"",
+        "\"\"\"This is a class docstring.\"\"\"",
+        "\"class variable\"",
+        "\"\"\"Constructor docstring.\"\"\"",
+        "\"private\"",
+        "\"\"\"This is a method docstring.\"\"\"",
+        "\"local\"",
+        "\" modified\"",
+        "\"\"\"This is a function docstring.\"\"\""
+      ],
+      "non_english_instances": []
+    },
+    "classes": {
+      "english_instances": [
+        "TestClass"
+      ],
+      "non_english_instances": []
+    },
+    "functions": {
+      "english_instances": [
+        "def __init__(self):\n        \"\"\"Constructor docstring.\"\"\"\n        self.instance_var = 123\n        self._private_var = \"private\"",
+        "def method(self):\n        \"\"\"This is a method docstring.\"\"\"\n        local_var = \"local\"\n        local_var += \" modified\"\n        return local_var",
+        "def standalone_function():\n    \"\"\"This is a function docstring.\"\"\"\n    result = 0\n    for i in range(10):\n        result += i\n    return result"
+      ],
+      "non_english_instances": []
+    },
+    "variables": {
+      "english_instances": [
+        "class_var",
+        "instance_var",
+        "global_var",
+        "local_var",
+        "_private_var",
+        "result",
+        "self",
+        "i",
+        "another_global"
+      ],
+      "non_english_instances": []
+    },
+    "docstrings": {
+      "english_instances": [
+        "This is a module level docstring.",
+        "This is a class docstring.",
+        "Constructor docstring.",
+        "This is a method docstring.",
+        "This is a function docstring."
+      ],
+      "non_english_instances": []
+    }
+  },
+  "file_analyses": [
+    {
+      "file_path": "test_files/test_with_docstrings.py",
+      "primary_language": "en",
+      "elements_analysis": {
+        "identifiers": {
+          "primary_language": "en",
+          "confidence": -55.78960180282593,
+          "language_breakdown": {
+            "en": -55.78960180282593
+          },
+          "instances": [
+            "class_var",
+            "TestClass",
+            "instance_var",
+            "method",
+            "range",
+            "global_var",
+            "local_var",
+            "_private_var",
+            "__init__",
+            "result",
+            "self",
+            "i",
+            "standalone_function",
+            "another_global"
+          ],
+          "english_instances": [
+            "class_var",
+            "TestClass",
+            "instance_var",
+            "method",
+            "range",
+            "global_var",
+            "local_var",
+            "_private_var",
+            "__init__",
+            "result",
+            "self",
+            "i",
+            "standalone_function",
+            "another_global"
+          ],
+          "non_english_instances": []
+        },
+        "comments": {
+          "primary_language": "en",
+          "confidence": 9.061840057373047,
+          "language_breakdown": {
+            "en": 9.061840057373047
+          },
+          "instances": [
+            "# Global variables"
+          ],
+          "english_instances": [
+            "# Global variables"
+          ],
+          "non_english_instances": []
+        },
+        "literals": {
+          "primary_language": "en",
+          "confidence": -316.82384300231934,
+          "language_breakdown": {
+            "en": -316.82384300231934
+          },
+          "instances": [
+            "\"\"\"This is a module level docstring.\"\"\"",
+            "\"test\"",
+            "\"\"\"This is a class docstring.\"\"\"",
+            "\"class variable\"",
+            "\"\"\"Constructor docstring.\"\"\"",
+            "\"private\"",
+            "\"\"\"This is a method docstring.\"\"\"",
+            "\"local\"",
+            "\" modified\"",
+            "\"\"\"This is a function docstring.\"\"\""
+          ],
+          "english_instances": [
+            "\"\"\"This is a module level docstring.\"\"\"",
+            "\"test\"",
+            "\"\"\"This is a class docstring.\"\"\"",
+            "\"class variable\"",
+            "\"\"\"Constructor docstring.\"\"\"",
+            "\"private\"",
+            "\"\"\"This is a method docstring.\"\"\"",
+            "\"local\"",
+            "\" modified\"",
+            "\"\"\"This is a function docstring.\"\"\""
+          ],
+          "non_english_instances": []
+        },
+        "classes": {
+          "primary_language": "en",
+          "confidence": 9.061840057373047,
+          "language_breakdown": {
+            "en": 9.061840057373047
+          },
+          "instances": [
+            "TestClass"
+          ],
+          "english_instances": [
+            "TestClass"
+          ],
+          "non_english_instances": []
+        },
+        "functions": {
+          "primary_language": "en",
+          "confidence": -250.65890264511108,
+          "language_breakdown": {
+            "en": -250.65890264511108
+          },
+          "instances": [
+            "def __init__(self):\n        \"\"\"Constructor docstring.\"\"\"\n        self.instance_var = 123\n        self._private_var = \"private\"",
+            "def method(self):\n        \"\"\"This is a method docstring.\"\"\"\n        local_var = \"local\"\n        local_var += \" modified\"\n        return local_var",
+            "def standalone_function():\n    \"\"\"This is a function docstring.\"\"\"\n    result = 0\n    for i in range(10):\n        result += i\n    return result"
+          ],
+          "english_instances": [
+            "def __init__(self):\n        \"\"\"Constructor docstring.\"\"\"\n        self.instance_var = 123\n        self._private_var = \"private\"",
+            "def method(self):\n        \"\"\"This is a method docstring.\"\"\"\n        local_var = \"local\"\n        local_var += \" modified\"\n        return local_var",
+            "def standalone_function():\n    \"\"\"This is a function docstring.\"\"\"\n    result = 0\n    for i in range(10):\n        result += i\n    return result"
+          ],
+          "non_english_instances": []
+        },
+        "variables": {
+          "primary_language": "en",
+          "confidence": -40.51617765426636,
+          "language_breakdown": {
+            "en": -40.51617765426636
+          },
+          "instances": [
+            "class_var",
+            "instance_var",
+            "global_var",
+            "local_var",
+            "_private_var",
+            "result",
+            "self",
+            "i",
+            "another_global"
+          ],
+          "english_instances": [
+            "class_var",
+            "instance_var",
+            "global_var",
+            "local_var",
+            "_private_var",
+            "result",
+            "self",
+            "i",
+            "another_global"
+          ],
+          "non_english_instances": []
+        },
+        "docstrings": {
+          "primary_language": "en",
+          "confidence": -358.4111518859863,
+          "language_breakdown": {
+            "en": -358.4111518859863
+          },
+          "instances": [
+            "This is a module level docstring.",
+            "This is a class docstring.",
+            "Constructor docstring.",
+            "This is a method docstring.",
+            "This is a function docstring."
+          ],
+          "english_instances": [
+            "This is a module level docstring.",
+            "This is a class docstring.",
+            "Constructor docstring.",
+            "This is a method docstring.",
+            "This is a function docstring."
+          ],
+          "non_english_instances": []
+        }
+      },
+      "language_breakdown": {
+        "en": -1092.6198525428772
+      }
+    }
+  ]
+}

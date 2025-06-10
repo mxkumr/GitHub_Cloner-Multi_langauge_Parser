@@ -80,29 +80,31 @@ class RepoParser:
         
         def is_docstring(node):
             """Helper function to determine if a node is a docstring."""
-            if not node.type == 'expression_statement':
-                return False
-            
-            # Must have a string as first child
-            if not (node.children and node.children[0].type in ('string', 'string_literal')):
-                return False
-            
-            # Must be first statement in its parent block
-            parent = node.parent
-            if not parent:
-                return False
-            
-            if parent.type == 'module':
-                # For modules, must be the first statement
-                return parent.children[0] == node
-            elif parent.type == 'block':
-                # For blocks, parent's parent must be class or function definition
-                grand_parent = parent.parent
-                if not grand_parent or grand_parent.type not in ('class_definition', 'function_definition'):
+            if node.type == 'expression_statement':
+                # Must have a string as first child
+                if not (node.children and node.children[0].type in ('string', 'string_literal')):
                     return False
-                # Must be first statement in the block
-                return parent.children[0] == node
-            
+                
+                # Must be first statement in its parent block
+                parent = node.parent
+                if not parent:
+                    return False
+                
+                if parent.type == 'module':
+                    # For modules, must be the first non-comment statement
+                    for child in parent.children:
+                        if child.type not in ('comment', 'line_comment', 'block_comment'):
+                            return child == node
+                elif parent.type == 'block':
+                    # For blocks, parent's parent must be class or function definition
+                    grand_parent = parent.parent
+                    if not grand_parent or grand_parent.type not in ('class_definition', 'function_definition'):
+                        return False
+                    # Must be first statement in the block
+                    for child in parent.children:
+                        if child.type not in ('comment', 'line_comment', 'block_comment'):
+                            return child == node
+                
             return False
         
         def visit_node(node):
@@ -113,11 +115,22 @@ class RepoParser:
             if node.type == 'keyword_argument':
                 elements['keywords_argument'].append(node.text.decode('utf8'))
             if node.type == 'identifier':
-                elements['identifiers'].add(node.text.decode('utf8'))  # Changed to add() for set
+                elements['identifiers'].add(node.text.decode('utf8'))
             elif node.type in ('comment', 'line_comment', 'block_comment'):
                 elements['comments'].append(node.text.decode('utf8'))
-            elif node.type in ('string_literal', 'number_literal', 'string', 'number'):
-                elements['literals'].append(node.text.decode('utf8'))
+            elif node.type in ('string_literal', 'number_literal', 'string', 'number', 'integer', 'float'):
+                text = node.text.decode('utf8')
+                print(f"Found potential literal: {text}, type: {node.type}, parent type: {node.parent.type if node.parent else 'None'}")
+                # Skip module name string, docstrings, and comparison literals
+                if (text != '"__main__"' and 
+                    not is_docstring(node) and 
+                    not (node.parent and is_docstring(node.parent)) and
+                    not (node.parent and node.parent.type == 'comparison_operator')):
+                    # For string literals, keep only the content
+                    if node.type in ('string_literal', 'string'):
+                        text = text.strip('"').strip("'")
+                    print(f"Adding literal: {text}")
+                    elements['literals'].append(text)
             elif node.type in ('class_definition', 'class_declaration', 'class', 'class_specifier'):
                 # For classes, only store the class name from the identifier node
                 for child in node.children:
@@ -125,7 +138,11 @@ class RepoParser:
                         elements['classes'].add(child.text.decode('utf8'))
                         break  # Only get the first identifier (class name)
             elif node.type in ('function_definition', 'method_definition', 'function_declaration', 'method_declaration'):
-                elements['functions'].append(node.text.decode('utf8'))
+                # Get the function name from the identifier child
+                for child in node.children:
+                    if child.type == 'identifier':
+                        elements['functions'].append(child.text.decode('utf8'))
+                        break
             
             # Variable detection
             elif node.type == 'assignment':
@@ -133,33 +150,46 @@ class RepoParser:
                 if node.children:
                     left_side = node.children[0]
                     if left_side.type == 'identifier':
-                        elements['variables'].add(left_side.text.decode('utf8'))
+                        var_name = left_side.text.decode('utf8')
+                        if var_name != 'self':  # Exclude 'self'
+                            elements['variables'].add(var_name)
                     elif left_side.type == 'attribute':
                         # Handle attribute assignments (e.g., self.var = ...)
                         for child in left_side.children:
                             if child.type == 'identifier':
-                                elements['variables'].add(child.text.decode('utf8'))
+                                var_name = child.text.decode('utf8')
+                                if var_name != 'self':  # Exclude 'self'
+                                    elements['variables'].add(var_name)
             elif node.type == 'global_statement':
                 # Get global variables
                 for child in node.children:
                     if child.type == 'identifier':
-                        elements['variables'].add(child.text.decode('utf8'))
+                        var_name = child.text.decode('utf8')
+                        if var_name != 'self':  # Exclude 'self'
+                            elements['variables'].add(var_name)
             elif node.type == 'augmented_assignment':
                 # Get variables from augmented assignments (+=, -=, etc.)
                 if node.children:
                     left_side = node.children[0]
                     if left_side.type == 'identifier':
-                        elements['variables'].add(left_side.text.decode('utf8'))
+                        var_name = left_side.text.decode('utf8')
+                        if var_name != 'self':  # Exclude 'self'
+                            elements['variables'].add(var_name)
             elif node.type == 'for_statement':
                 # Get loop variables
                 if node.children:
                     target = node.children[1]  # The loop variable is typically the second child
                     if target.type == 'identifier':
-                        elements['variables'].add(target.text.decode('utf8'))
+                        var_name = target.text.decode('utf8')
+                        if var_name != 'self':  # Exclude 'self'
+                            elements['variables'].add(var_name)
             
             # Docstring detection
-            elif is_docstring(node):
-                docstring = node.children[0].text.decode('utf8')
+            if is_docstring(node):
+                if node.type == 'string':
+                    docstring = node.text.decode('utf8')
+                else:
+                    docstring = node.children[0].text.decode('utf8')
                 # Remove common string delimiters
                 docstring = docstring.strip('"""').strip("'''").strip('"').strip("'")
                 elements['docstrings'].append(docstring)
@@ -233,7 +263,7 @@ def main():
     # # Test files
     # test_files = [
     #     "test_files/test_with_docstrings.py",
-    #     "test_files/test_chinese.py"
+
     # ]
     
     # for test_file in test_files:
@@ -266,7 +296,8 @@ def main():
     
     # Example repositories to parse
     repos = [
-        "https://github.com/leifengwl/MoGuDing-Auto",
+        "https://github.com/mxkumr/test_case_parser",
+        #"https://github.com/leifengwl/MoGuDing-Auto",
     ]
     
     for repo_url in repos:
@@ -289,13 +320,17 @@ def main():
                     elements = result['elements']
                     print(f"Found:")
                     print(f"- {len(elements['keywords_argument'])} keywords_argument")
+                    print(f"Keywords found: {sorted(elements['keywords_argument'])}")
                     print(f"- {len(elements['identifiers'])} unique identifiers")
                     print(f"Identifiers found: {sorted(elements['identifiers'])}")
                     print(f"- {len(elements['comments'])} comments")
-                    # print(f"- {(elements['comments'])} comments")
+                    print(f"- {(elements['comments'])} comments")
                     print(f"- {len(elements['literals'])} literals")
+                    print(f"Literals found: {sorted(elements['literals'])}")
                     print(f"- {len(elements['classes'])} classes")
+                    print(f"Classes found: {sorted(elements['classes'])}")
                     print(f"- {len(elements['functions'])} functions")
+                    print(f"Functions found: {sorted(elements['functions'])}")
                     print(f"- {len(elements['variables'])} variables")
                     if elements['variables']:
                         print(f"Variables found: {sorted(elements['variables'])}")
