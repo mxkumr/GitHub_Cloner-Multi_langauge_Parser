@@ -101,94 +101,58 @@ class RepoElementParser:
         """Check if an identifier is from the standard library."""
         return name in self.std_lib_identifiers
 
-    def _is_variable(self, node) -> bool:
+    def _collect_class_names(self, node, class_names):
+        """First pass: Collect all class names in the AST."""
+        # Handle different language-specific class definitions
+        if node.type in ('class_definition', 'class_declaration', 'class_specifier', 'struct_specifier'):
+            for child in node.children:
+                if child.type == 'identifier':
+                    class_name = child.text.decode('utf8')
+                    class_names.add(class_name)
+                    break
+        for child in node.children:
+            self._collect_class_names(child, class_names)
+
+    def _is_variable(self, node, class_names=None) -> bool:
         """Determine if an identifier node represents a variable."""
         if node.type != 'identifier':
             return False
-            
-        # Skip if it's a standard library identifier
-        if self._is_std_lib_identifier(node.text.decode('utf8')):
+        name = node.text.decode('utf8')
+        if self._is_std_lib_identifier(name):
             return False
-            
-        # Skip if it's part of a function or class definition
+        if class_names and name in class_names:
+            return False
         if node.parent and node.parent.type in ('function_definition', 'class_definition', 'constructor_declaration', 'constructor_or_destructor_definition'):
             return False
-            
-        # Skip if it's part of a function call
         if node.parent and node.parent.type == 'call':
             return False
-            
-        # Skip if it's part of an import statement
         if node.parent and node.parent.type in ('import_statement', 'import_from_statement'):
             return False
-            
-        # Skip special identifiers
-        if node.text.decode('utf8') in ('__name__', '__main__', '__file__', 'this', 'super'):
+        if name in ('__name__', '__main__', '__file__', 'this', 'super'):
             return False
-            
-        # Skip if it's a method name
         if node.parent and node.parent.type == 'method_definition':
             return False
-            
-        # Skip if it's a function name
         if node.parent and node.parent.type == 'function_definition':
             return False
-            
-        # Skip if it's a class name
         if node.parent and node.parent.type == 'class_definition':
             return False
-            
-        # Skip if it's a method name in a class body
         if node.parent and node.parent.parent and node.parent.parent.type == 'class_definition':
             if node.parent.type == 'block' and any(child.type == 'method_definition' for child in node.parent.children):
                 return False
-                
-        # Skip if it's a method name in a function body
         if node.parent and node.parent.parent and node.parent.parent.type == 'function_definition':
             if node.parent.type == 'block' and any(child.type == 'method_definition' for child in node.parent.children):
                 return False
-                
-        # Skip if it's a function name in a class body
         if node.parent and node.parent.parent and node.parent.parent.type == 'class_definition':
             if node.parent.type == 'block' and any(child.type == 'function_definition' for child in node.parent.children):
                 return False
-            
         return True
 
-    def _extract_elements(self, node, source_code: bytes) -> None:
-        """Extract different code elements from the AST node."""
-        # Get the node type and text
+    def _extract_elements(self, node, source_code: bytes, class_names=None) -> None:
         node_type = node.type
         node_text = node.text.decode('utf8')
 
-        # Handle code elements
-        if node_type == 'identifier':
-            name = node_text
-            # Only add non-standard library identifiers
-            if not self._is_std_lib_identifier(name):
-                # Add to identifiers if it's not a special identifier
-                if name not in ('__name__', '__main__', '__file__', 'this', 'super'):
-                    self.elements['identifiers'].add(name)
-                # Add to variables only if it's a variable
-                if self._is_variable(node):
-                    self.elements['variables'].add(name)
-
-        elif node_type in ('string_literal', 'string'):
-            text = node_text.strip('"\'')
-            if self._is_docstring(node.parent):
-                self.elements['docstrings'].append(text)
-            else:
-                self.elements['literals'].append(text)
-
-        elif node_type in ('number_literal', 'integer', 'float'):
-            self.elements['literals'].append(node_text)
-
-        elif node_type in ('comment', 'line_comment'):
-            text = node_text.lstrip('#').strip()
-            self.elements['comments'].append(text)
-
-        # Handle class and function names
-        elif node_type == 'class_definition':
+        # Handle class definitions for all languages
+        if node_type in ('class_definition', 'class_declaration', 'class_specifier', 'struct_specifier'):
             for child in node.children:
                 if child.type == 'identifier':
                     class_name = child.text.decode('utf8')
@@ -197,6 +161,25 @@ class RepoElementParser:
                         self.elements['identifiers'].add(class_name)
                     break
 
+        # Handle code elements
+        if node_type == 'identifier':
+            name = node_text
+            if not self._is_std_lib_identifier(name):
+                if name not in ('__name__', '__main__', '__file__', 'this', 'super'):
+                    self.elements['identifiers'].add(name)
+                if self._is_variable(node, class_names):
+                    self.elements['variables'].add(name)
+        elif node_type in ('string_literal', 'string'):
+            text = node_text.strip('"\'')
+            if self._is_docstring(node.parent):
+                self.elements['docstrings'].append(text)
+            else:
+                self.elements['literals'].append(text)
+        elif node_type in ('number_literal', 'integer', 'float'):
+            self.elements['literals'].append(node_text)
+        elif node_type in ('comment', 'line_comment'):
+            text = node_text.lstrip('#').strip()
+            self.elements['comments'].append(text)
         elif node_type in ('function_definition', 'constructor_declaration', 'constructor_or_destructor_definition', 'method_definition'):
             for child in node.children:
                 if child.type == 'identifier':
@@ -208,7 +191,7 @@ class RepoElementParser:
 
         # Recursively process children
         for child in node.children:
-            self._extract_elements(child, source_code)
+            self._extract_elements(child, source_code, class_names)
 
     def parse_file(self, file_path: str) -> Dict[str, Any]:
         """Parse a single file and extract all code elements."""
@@ -224,7 +207,12 @@ class RepoElementParser:
             # Reset elements for new file
             self.elements = {k: set() if isinstance(v, set) else [] for k, v in self.elements.items()}
             
-            self._extract_elements(tree.root_node, source_code)
+            # First pass: collect all class names
+            class_names = set()
+            self._collect_class_names(tree.root_node, class_names)
+            
+            # Second pass: extract all elements, using class_names
+            self._extract_elements(tree.root_node, source_code, class_names)
             
             result = {
                 'identifiers': sorted(list(self.elements['identifiers'])),
