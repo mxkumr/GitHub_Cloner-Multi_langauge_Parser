@@ -105,11 +105,21 @@ class RepoElementParser:
         """First pass: Collect all class names in the AST."""
         # Handle different language-specific class definitions
         if node.type in ('class_definition', 'class_declaration', 'class_specifier', 'struct_specifier'):
-            for child in node.children:
-                if child.type == 'identifier':
-                    class_name = child.text.decode('utf8')
-                    class_names.add(class_name)
-                    break
+            # For Python, Java, JavaScript classes
+            if node.type in ('class_definition', 'class_declaration'):
+                for child in node.children:
+                    if child.type == 'identifier':
+                        class_name = child.text.decode('utf8')
+                        class_names.add(class_name)
+                        break
+            # For C++ classes and C structs
+            elif node.type in ('class_specifier', 'struct_specifier'):
+                for child in node.children:
+                    if child.type == 'type_identifier':
+                        class_name = child.text.decode('utf8')
+                        class_names.add(class_name)
+                        break
+        
         for child in node.children:
             self._collect_class_names(child, class_names)
 
@@ -153,13 +163,24 @@ class RepoElementParser:
 
         # Handle class definitions for all languages
         if node_type in ('class_definition', 'class_declaration', 'class_specifier', 'struct_specifier'):
-            for child in node.children:
-                if child.type == 'identifier':
-                    class_name = child.text.decode('utf8')
-                    if not self._is_std_lib_identifier(class_name):
-                        self.elements['classes'].add(class_name)
-                        self.elements['identifiers'].add(class_name)
-                    break
+            # For Python, Java, JavaScript classes
+            if node_type in ('class_definition', 'class_declaration'):
+                for child in node.children:
+                    if child.type == 'identifier':
+                        class_name = child.text.decode('utf8')
+                        if not self._is_std_lib_identifier(class_name):
+                            self.elements['classes'].add(class_name)
+                            self.elements['identifiers'].add(class_name)
+                        break
+            # For C++ classes and C structs
+            elif node_type in ('class_specifier', 'struct_specifier'):
+                for child in node.children:
+                    if child.type == 'type_identifier':
+                        class_name = child.text.decode('utf8')
+                        if not self._is_std_lib_identifier(class_name):
+                            self.elements['classes'].add(class_name)
+                            self.elements['identifiers'].add(class_name)
+                        break
 
         # Handle code elements
         if node_type == 'identifier':

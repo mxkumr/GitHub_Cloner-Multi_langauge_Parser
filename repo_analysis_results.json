@@ -6,9 +6,11 @@
   "repository_elements": {
     "identifiers": [
       "HelperClass",
+      "HelperStruct",
       "Main",
       "System",
       "TestClass",
+      "TestStruct",
       "__init__",
       "args",
       "c",
@@ -61,7 +63,6 @@
     ],
     "variables": [
       "System",
-      "TestClass",
       "args",
       "c",
       "calculate",
@@ -147,8 +148,10 @@
     ],
     "classes": [
       "HelperClass",
+      "HelperStruct",
       "Main",
-      "TestClass"
+      "TestClass",
+      "TestStruct"
     ]
   },
   "file_analyses": [
@@ -158,6 +161,8 @@
       "file_path": "cloned_repos\\test_case_parser\\test_c.c",
       "elements": {
         "identifiers": [
+          "HelperStruct",
+          "TestStruct",
           "calculate",
           "helper",
           "hs",
@@ -212,7 +217,10 @@
         ],
         "docstrings": [],
         "functions": [],
-        "classes": []
+        "classes": [
+          "HelperStruct",
+          "TestStruct"
+        ]
       }
     },
     {
@@ -221,6 +229,7 @@
       "file_path": "cloned_repos\\test_case_parser\\test_cpp.cpp",
       "elements": {
         "identifiers": [
+          "HelperClass",
           "TestClass",
           "c",
           "data",
@@ -241,7 +250,6 @@
           "0"
         ],
         "variables": [
-          "TestClass",
           "c",
           "data",
           "helper",
@@ -267,7 +275,10 @@
         ],
         "docstrings": [],
         "functions": [],
-        "classes": []
+        "classes": [
+          "HelperClass",
+          "TestClass"
+        ]
       }
     },
     {
