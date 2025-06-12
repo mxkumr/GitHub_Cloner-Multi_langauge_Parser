@@ -192,10 +192,11 @@ class RepoElementParser:
                     self.elements['variables'].add(name)
         elif node_type in ('string_literal', 'string'):
             text = node_text.strip('"\'')
-            if self._is_docstring(node.parent):
-                self.elements['docstrings'].append(text)
-            else:
-                self.elements['literals'].append(text)
+            if text:  # Only add non-empty strings
+                if self._is_docstring(node.parent):
+                    self.elements['docstrings'].append(text)
+                else:
+                    self.elements['literals'].append(text)
         elif node_type in ('number_literal', 'integer', 'float'):
             self.elements['literals'].append(node_text)
         elif node_type in ('comment', 'line_comment'):
