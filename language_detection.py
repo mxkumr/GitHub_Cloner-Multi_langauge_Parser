@@ -1,6 +1,8 @@
 import json
 import re
 from collections import defaultdict
+import matplotlib.pyplot as plt
+import os
 
 # Unicode script ranges
 UNICODE_SCRIPTS = [
@@ -39,6 +41,22 @@ def classify_string(s):
     dominant_script = max(script_counts, key=script_counts.get)
     confidence = script_counts[dominant_script] / total
     return {'script': dominant_script, 'confidence': round(confidence, 2)}
+
+def create_pie_chart(data, title, output_path):
+    """Create a pie chart from the given data and save it."""
+    # Extract labels and sizes
+    labels = ['English/ASCII', 'Non-English']
+    sizes = [data['english_ascii']['percentage'], data['non_english']['percentage']]
+    
+    # Create figure and axis
+    plt.figure(figsize=(10, 8))
+    plt.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=90)
+    plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle
+    plt.title(title)
+    
+    # Save the plot
+    plt.savefig(output_path)
+    plt.close()
 
 def main():
     with open('repo_analysis_results.json', encoding='utf-8') as f:
@@ -100,12 +118,50 @@ def main():
                 "total_count": len(non_english_items)
             }
 
+    # Create output directory for charts if it doesn't exist
+    os.makedirs('language_charts', exist_ok=True)
+
+    # Create overall pie chart
+    create_pie_chart(
+        output['overall_statistics'],
+        'Overall Language Distribution',
+        'language_charts/overall_distribution.png'
+    )
+
+    # Create individual pie charts for each file
+    for key in results.keys():
+        if key in output['english_ascii_parts'] or key in output['non_english_parts']:
+            english_count = output['english_ascii_parts'].get(key, {}).get('total_count', 0)
+            non_english_count = output['non_english_parts'].get(key, {}).get('total_count', 0)
+            total = english_count + non_english_count
+            
+            if total > 0:
+                file_stats = {
+                    'english_ascii': {
+                        'percentage': round(english_count/total*100, 2)
+                    },
+                    'non_english': {
+                        'percentage': round(non_english_count/total*100, 2)
+                    }
+                }
+                create_pie_chart(
+                    file_stats,
+                    f'Language Distribution - {key}',
+                    f'language_charts/{key}_distribution.png'
+                )
+
     # Save to file
     with open('language_classification_results.json', 'w', encoding='utf-8') as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
 
     # Print the results in a readable format
-    print(json.dumps(output, ensure_ascii=False, indent=2))
+    print("\nLanguage Detection Results Summary:")
+    print("=" * 80)
+    print(f"Total Elements: {output['overall_statistics']['total_elements']}")
+    print(f"English/ASCII Content: {output['overall_statistics']['english_ascii']['percentage']}%")
+    print(f"Non-English Content: {output['overall_statistics']['non_english']['percentage']}%")
+    print("=" * 80)
+    print("\nCharts have been generated in the 'language_charts' directory")
 
 if __name__ == '__main__':
     main()

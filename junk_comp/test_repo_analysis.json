@@ -1,0 +1,42 @@
+{
+  "repository_elements": {
+    "test_repo": {
+      "identifiers": [
+        "userName",
+        "密码",
+        "API_KEY",
+        "用户ID",
+        "accessToken",
+        "登录状态",
+        "isValid",
+        "错误信息",
+        "config",
+        "设置"
+      ],
+      "comments": [
+        "This is a test comment",
+        "// 这是一个测试注释",
+        "/* API endpoint configuration */",
+        "// 用户认证模块",
+        "TODO: Implement error handling",
+        "// 需要更新配置",
+        "FIXME: Check authentication",
+        "// 系统初始化",
+        "Note: This is important",
+        "// 重要提示"
+      ],
+      "literals": [
+        "https://api.example.com",
+        "错误：无法连接",
+        "user@example.com",
+        "系统错误",
+        "http://localhost:3000",
+        "成功",
+        "失败",
+        "https://测试.com",
+        "API_v1",
+        "测试123"
+      ]
+    }
+  }
+}
