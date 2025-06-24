@@ -1,0 +1,35 @@
+{
+    "repository_summary": {
+        "repository_url": "https://github.com/01walid/Nibras",
+        "repository_name": "Nibras",
+        "total_files": 6,
+        "analyzed_files": 5,
+        "total_elements": 666,
+        "language_distribution": {
+            "cpp": 5
+        }
+    },
+    "detected_scripts": [
+        "Other Non-English",
+        "Arabic"
+    ],
+    "non_english_characters": {
+        "literals": [
+            "Serveur pas trouvé, vérifier votre connexion internet!",
+            "ِ",
+            "ً",
+            "ٌ",
+            "ُ",
+            "Vous avez la dernière version du programme!",
+            "Revérifier les mises à jours",
+            "ٍ",
+            "Vérifier les mises à jours",
+            "َ",
+            "ْ",
+            "Mise à jour dispinible!",
+            "\\n pas de mise à jour disponible pour le moment.",
+            "Pas de mise à jour"
+        ]
+    },
+    "english_characters": {}
+}

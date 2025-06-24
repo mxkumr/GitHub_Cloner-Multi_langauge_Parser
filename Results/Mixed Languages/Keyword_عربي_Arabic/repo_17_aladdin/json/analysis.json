@@ -1,0 +1,16 @@
+{
+    "repository_summary": {
+        "repository_url": "https://github.com/arbweb-org/aladdin",
+        "repository_name": "aladdin",
+        "total_files": 318,
+        "analyzed_files": 318,
+        "total_elements": 54765,
+        "language_distribution": {
+            "java": 306,
+            "javascript": 12
+        }
+    },
+    "detected_scripts": [],
+    "non_english_characters": {},
+    "english_characters": {}
+}

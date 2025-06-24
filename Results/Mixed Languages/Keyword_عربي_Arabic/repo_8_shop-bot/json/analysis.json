@@ -1,0 +1,48 @@
+{
+    "repository_summary": {
+        "repository_url": "https://github.com/zakiezscipter/shop-bot",
+        "repository_name": "shop-bot",
+        "total_files": 1,
+        "analyzed_files": 1,
+        "total_elements": 363,
+        "language_distribution": {
+            "javascript": 1
+        }
+    },
+    "detected_scripts": [
+        "Other Non-English",
+        "Arabic"
+    ],
+    "non_english_characters": {
+        "literals": [
+            "> ** The bot has been successfully restarted ✅**",
+            "🟢 تم ارسال المنتج في الخاص",
+            "**There is no such account ❌**",
+            "> **The user has been removed from the blacklist ✅**",
+            "> **✅ Probot has been successfully identified!**",
+            "**This item does not exist ❌**",
+            "> **The user has been added to the blacklist ✅**",
+            "> ** Store opened successfully ✅**",
+            "> ** The buy room has been selected successfully ✅**",
+            "**Time is over  operation canceled ❌ **",
+            "> ** The log room has been selected successfully ✅**",
+            "> ** All members have been removed from the blacklist ✅**",
+            "You don't have permission ❌",
+            "**Time is over , operation canceled ❌ **",
+            "> ** The add log room has been selected successfully ✅**",
+            "> ** Store closed successfully ✅**",
+            "**انتهت الكمية**",
+            "> ** Customer roll selected successfully ✅**",
+            "**This is not the right room to buy ❌**",
+            "> ** The notification room has been selected successfully ✅**"
+        ],
+        "comments": [
+            "//ايدي الي هيتحول",
+            "//اي دي حقك",
+            "///برفكس",
+            "//message.reply(\"**Check your Dm's ✅**\")",
+            "//let sv = '1009103814030274610' حط ايدي سيرفر يخرج منو بوت"
+        ]
+    },
+    "english_characters": {}
+}

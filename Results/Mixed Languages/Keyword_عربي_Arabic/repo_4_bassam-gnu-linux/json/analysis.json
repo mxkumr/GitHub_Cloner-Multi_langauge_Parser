@@ -1,0 +1,23 @@
+{
+    "repository_summary": {
+        "repository_url": "https://github.com/SalehGNUTUX/bassam-gnu-linux",
+        "repository_name": "bassam-gnu-linux",
+        "total_files": 1,
+        "analyzed_files": 1,
+        "total_elements": 57,
+        "language_distribution": {
+            "javascript": 1
+        }
+    },
+    "detected_scripts": [
+        "Arabic"
+    ],
+    "non_english_characters": {
+        "literals": [
+            "إغلاق",
+            "بسّام",
+            "عرض التطبيق"
+        ]
+    },
+    "english_characters": {}
+}

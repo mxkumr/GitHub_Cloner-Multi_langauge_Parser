@@ -1,0 +1,45 @@
+{
+    "repository_summary": {
+        "repository_url": "https://github.com/alphagyuu/namechart.kr-crawler",
+        "repository_name": "namechart.kr-crawler",
+        "total_files": 1,
+        "analyzed_files": 1,
+        "total_elements": 167,
+        "language_distribution": {
+            "python": 1
+        }
+    },
+    "detected_scripts": [
+        "Hangul (Korean)"
+    ],
+    "non_english_characters": {
+        "literals": [
+            "f\"CSV 파일이 성공적으로 {save_path}에 저장되었습니다.",
+            "에러 발생:",
+            "f\"{page} 페이지 완료"
+        ],
+        "comments": [
+            "1페이지부터 1276페이지까지",
+            "CSV 파일로 저장",
+            "페이지 소스 가져오기",
+            "원하는 디렉토리 경로로 변경",
+            "첫 번째 행은 헤더이므로 제외",
+            "테이블에서 데이터 추출",
+            "두 번째 열에 이름이 있음",
+            "크롬 드라이버 경로 설정",
+            "이름 열이 있는지 확인",
+            "두 번째 테이블은 헤더가 없음",
+            "저장할 디렉토리를 인자로 받음",
+            "드라이버 닫기",
+            "메인 함수",
+            "페이지 로딩 시간을 기다림",
+            "Selenium WebDriver 설정",
+            "디렉토리가 없으면 생성",
+            "BeautifulSoup으로 HTML 파싱",
+            "모든 행을 포함",
+            "첫 번째 테이블은 헤더가 있음",
+            "데이터프레임으로 변환"
+        ]
+    },
+    "english_characters": {}
+}

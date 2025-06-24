@@ -1,0 +1,23 @@
+{
+    "repository_summary": {
+        "repository_url": "https://github.com/ru-doc/java-sdk",
+        "repository_name": "java-sdk",
+        "total_files": 7215,
+        "analyzed_files": 7215,
+        "total_elements": 929779,
+        "language_distribution": {
+            "java": 7208,
+            "c": 7
+        }
+    },
+    "detected_scripts": [
+        "Cyrillic"
+    ],
+    "non_english_characters": {
+        "comments": [
+            "// Поддержка Accessibility",
+            "// Если поле stub не заполнено, апплет никогда не будет активен"
+        ]
+    },
+    "english_characters": {}
+}

@@ -1,0 +1,84 @@
+{
+    "repository_summary": {
+        "repository_url": "https://github.com/deagwon97/ct-abdomen",
+        "repository_name": "ct-abdomen",
+        "total_files": 16,
+        "analyzed_files": 16,
+        "total_elements": 3104,
+        "language_distribution": {
+            "python": 16
+        }
+    },
+    "detected_scripts": [
+        "Hangul (Korean)"
+    ],
+    "non_english_characters": {
+        "comments": [
+            "3차원 이미지 불러오기 불러오기--------------------------------------------",
+            "horizontal subcutaneous 중복",
+            "y축을 기준으로 상하 padding을 적용하여 512,512이미지 생성",
+            "입력받은 이미지의 z축을 4배로 resize",
+            "2배",
+            "모델이 예측한 sagittal_mask를 입력으로 받음",
+            "정규화",
+            "내장지방, 피하지방 추가하기",
+            "3차원 입력을 받아서 추론하고 출력 [샘플 수, 세로축, 가로축]",
+            "axis 0의 크기 계산",
+            "wandb 설정",
+            "예측",
+            "horizontal visceral 중복",
+            "horizontal 원본",
+            "한 폴드당 150 Epoch 수행",
+            "원본 크기로 resize하여 반환",
+            "window = 1 # 연상량이 충분하다면 20으로 설정",
+            "axis 1 크기를 512로 바꿀 때,",
+            "dir_path에 들어있는 dcm파일을 읽어서 3d numpy array로 반환",
+            "3차원 plot 그리기 데이터 생성",
+            "(128, 128, 채널(musle, fat, innerfat))",
+            "abdomen영역을 detect 모델",
+            "resize (모두 적용)",
+            "z_size : x축의 길이, 고정 x",
+            "근육을 기준으로 생성",
+            "모델 불러오기-------------------------------------------------------------",
+            "가로 세로 비율을 유지하면서 axis 1의 크기를 512로 resize",
+            "abdomen에서 musle, visceral, subcutaneous를 segment 모델",
+            "가장 마지막 epoch의 step별 score 평균",
+            "레이블",
+            "추가 정의 필요",
+            "saggital plane(2차원)을 입력으로 받음",
+            "마진 적용",
+            "reshape for converting to tensor (모두 적용)",
+            "원본 # permute는 축 변경",
+            "가로 세로 비율을 유지하면서 z축을 512로 resize",
+            "입력 받은 numpy array를 0.3 quantile과 0.99 quantile을 기준으로 min max scaleing",
+            "axis 1의 크기를 4배로 resize",
+            "읽어오기 -> numpy변환 -> 가운데만 선택 -> 합치기",
+            "파일이름에서 숫자를 추출",
+            "1차 threshold 적용",
+            "sagittal_mask를 바탕으로 l3의 위치를 계산하여 반환",
+            "(x_size, z_size)크기의 이미지 입력, x_size == 512",
+            "[샘플수, 채널 수(1), 세로축, 가로축]",
+            "Resize -> augmentation -> preprocessing(pretrained 모델) -> to tensor",
+            "x_size : x축 길이, 512로 고정 o",
+            "horizontal muscle 중복",
+            "읽어오기 -> numpy변환 -> 가운데만 선택",
+            "입력 받은 이미지의 상하좌우로 margin을 적용하고",
+            "horizontal 전부 중복"
+        ],
+        "literals": [
+            "1.원본",
+            "f\"1.원본/{person_idx}/",
+            "f\"1.원본/",
+            "3.내장지방",
+            "f\"2.근육/tif/{person_idx}/",
+            "f\"1.원본/{person_idx}",
+            "4.피하지방",
+            "2.근육",
+            "f\"2.근육/tif/{person_idx}"
+        ],
+        "docstrings": [
+            "\r\n    plt.figure를 RGBA로 변환(layer가 4개)\r\n    shape: height, width, layer\r\n    "
+        ]
+    },
+    "english_characters": {}
+}

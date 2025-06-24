@@ -1,0 +1,21 @@
+{
+    "repository_summary": {
+        "repository_url": "https://github.com/nlpub/rdt",
+        "repository_name": "rdt",
+        "total_files": 4,
+        "analyzed_files": 4,
+        "total_elements": 423,
+        "language_distribution": {
+            "python": 4
+        }
+    },
+    "detected_scripts": [
+        "Cyrillic"
+    ],
+    "non_english_characters": {
+        "literals": [
+            "граф"
+        ]
+    },
+    "english_characters": {}
+}

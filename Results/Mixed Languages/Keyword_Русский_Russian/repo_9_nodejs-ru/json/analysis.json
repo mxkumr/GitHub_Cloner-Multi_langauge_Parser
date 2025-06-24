@@ -1,0 +1,15 @@
+{
+    "repository_summary": {
+        "repository_url": "https://github.com/nodejs/nodejs-ru",
+        "repository_name": "nodejs-ru",
+        "total_files": 9,
+        "analyzed_files": 9,
+        "total_elements": 1204,
+        "language_distribution": {
+            "javascript": 9
+        }
+    },
+    "detected_scripts": [],
+    "non_english_characters": {},
+    "english_characters": {}
+}

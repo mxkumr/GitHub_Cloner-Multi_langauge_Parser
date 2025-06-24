@@ -1,0 +1,21 @@
+{
+    "repository_summary": {
+        "repository_url": "https://github.com/olegbarabanov/google-typescript-style-guide-ru",
+        "repository_name": "google-typescript-style-guide-ru",
+        "total_files": 2,
+        "analyzed_files": 2,
+        "total_elements": 76,
+        "language_distribution": {
+            "javascript": 2
+        }
+    },
+    "detected_scripts": [
+        "Cyrillic"
+    ],
+    "non_english_characters": {
+        "literals": [
+            "Содержание"
+        ]
+    },
+    "english_characters": {}
+}

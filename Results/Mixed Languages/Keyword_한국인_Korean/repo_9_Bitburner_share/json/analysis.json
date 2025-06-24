@@ -1,0 +1,27 @@
+{
+    "repository_summary": {
+        "repository_url": "https://github.com/yeong35/Bitburner_share",
+        "repository_name": "Bitburner_share",
+        "total_files": 4,
+        "analyzed_files": 4,
+        "total_elements": 91,
+        "language_distribution": {
+            "javascript": 4
+        }
+    },
+    "detected_scripts": [
+        "Hangul (Korean)"
+    ],
+    "non_english_characters": {
+        "comments": [
+            "/*\r\n\t전체 서버 네트워크를 순회하는 함수\r\n\t순회하면서 각 서버에 코드를 돌릴 수 있다면 NUKE(해킹)후 프로그램을 돌린다.\r\n*/",
+            "/**\r\n * 구매된 모든 개인 서버의 RAM을 128GB 업그레이드 하는 코드입니다.\r\n * 업그레이드 후, 128GB에서 최대 스레드의 early-hack-template를 실행합니다.\r\n*/",
+            "/**\r\n * 전체 서버에서 해킹할 수 있는 서버를 모두 확인한 후 해킹을 진행한다.\r\n * 진행한 후에 각 서버 RAM에 따라 가장 많은 early_hack_termplate을 실행한다. \r\n */",
+            "/**\r\n * 각 서버기 해킹할 수 있는 환경인지 확인하고,\r\n * 해킹할 수 있다면(각 port를 열 수 있다면) 해킹 후 프로그램을 돌린다.\r\n */",
+            "// 현재 서버가 ignores에 있으면 다음 서버 확인",
+            "/**\r\n * RAM이 8GB인 개인서버를 자동으로 구매해주는 프로그램입니다.\r\n * 이 코드는 공식 문서에서 제공하는 코드입니다. :)\r\n */",
+            "/**\r\n * 가장 기초적인 해킹하는 코드입니다.\r\n * 각 서버에서 이 프로그램을 실행할 시, 프로그램이 종료되지 않는 한 돈을 벌 수 있습니다.\r\n * \r\n * 이 코드는 공식 문서에서 제공하는 코드입니다 :)\r\n */"
+        ]
+    },
+    "english_characters": {}
+}

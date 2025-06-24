@@ -1,0 +1,15 @@
+{
+    "repository_summary": {
+        "repository_url": "https://github.com/TallyH0/aihubpedkorean",
+        "repository_name": "aihubpedkorean",
+        "total_files": 7,
+        "analyzed_files": 7,
+        "total_elements": 1496,
+        "language_distribution": {
+            "python": 7
+        }
+    },
+    "detected_scripts": [],
+    "non_english_characters": {},
+    "english_characters": {}
+}

@@ -1,0 +1,48 @@
+{
+    "repository_summary": {
+        "repository_url": "https://github.com/TheOnlyMonster/Franko-Arabic-Chrome-Extension",
+        "repository_name": "Franko-Arabic-Chrome-Extension",
+        "total_files": 5,
+        "analyzed_files": 5,
+        "total_elements": 825,
+        "language_distribution": {
+            "javascript": 5
+        }
+    },
+    "detected_scripts": [
+        "Arabic"
+    ],
+    "non_english_characters": {
+        "literals": [
+            "ض",
+            "ش",
+            "ز",
+            "س",
+            "ت",
+            "ك",
+            "ع",
+            "د",
+            "ط",
+            "ه",
+            "ث",
+            "ل",
+            "ذ",
+            "ا",
+            "ق",
+            "غ",
+            "م",
+            "ص",
+            "ج",
+            "و",
+            "ن",
+            "خ",
+            "ب",
+            "ي",
+            "ر",
+            "ح",
+            "ف",
+            "ظ"
+        ]
+    },
+    "english_characters": {}
+}

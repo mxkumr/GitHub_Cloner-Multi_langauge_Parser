@@ -1,0 +1,71 @@
+{
+    "repository_summary": {
+        "repository_url": "https://github.com/seymoe/mp-jishengji",
+        "repository_name": "mp-jishengji",
+        "total_files": 5,
+        "analyzed_files": 5,
+        "total_elements": 228,
+        "language_distribution": {
+            "javascript": 5
+        }
+    },
+    "detected_scripts": [
+        "CJK Unified Ideographs"
+    ],
+    "non_english_characters": {
+        "comments": [
+            "// 倒计时函数",
+            "// 获取设备系统信息",
+            "// 压缩js",
+            "// 压缩sass",
+            "// 传入秒数，返回剩余的时，分，秒",
+            "// 本地存储相关",
+            "// 判断三元素的数组是否都为‘00’",
+            "// 格式化日期",
+            "// 辅助函数，log",
+            "// 账本支出类目",
+            "// 账本收入类目"
+        ],
+        "literals": [
+            "交通",
+            "餐饮",
+            "社交",
+            "其他",
+            "运动",
+            "通讯",
+            "旅行",
+            "日用",
+            "兼职",
+            "数码",
+            "娱乐",
+            "购物",
+            "烟酒",
+            "宠物",
+            "捐赠",
+            "居家",
+            "长辈",
+            "汽车",
+            "亲友",
+            "快递",
+            "医疗",
+            "红包",
+            "彩票",
+            "住房",
+            "蔬菜",
+            "办公",
+            "工资",
+            "美容",
+            "孩子",
+            "礼金",
+            "礼物",
+            "服饰",
+            "零食",
+            "书籍",
+            "学习",
+            "水果",
+            "理财",
+            "维修"
+        ]
+    },
+    "english_characters": {}
+}

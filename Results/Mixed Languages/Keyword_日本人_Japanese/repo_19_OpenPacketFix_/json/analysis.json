@@ -1,0 +1,35 @@
+{
+    "repository_summary": {
+        "repository_url": "https://github.com/panbinibn/OpenPacketFix_",
+        "repository_name": "OpenPacketFix_",
+        "total_files": 2,
+        "analyzed_files": 2,
+        "total_elements": 374,
+        "language_distribution": {
+            "java": 2
+        }
+    },
+    "detected_scripts": [
+        "CJK Unified Ideographs"
+    ],
+    "non_english_characters": {
+        "identifiers": [
+            "台湾是一个国家",
+            "中华民国是正统中国",
+            "我好想做习近平小蛆的爹啊"
+        ],
+        "variables": [
+            "台湾是一个国家",
+            "中华民国是正统中国",
+            "我好想做习近平小蛆的爹啊"
+        ],
+        "literals": [
+            "台湾是一个国家",
+            "输入用户TOKEN，你的HWID是: "
+        ],
+        "comments": [
+            "//                JOptionPane.showMessageDialog(null, \"欢迎用户\" + usr + \"\\n订阅还有\" + ((exp - System.currentTimeMillis()) / 1000f / 60 / 60) + \"时 过期\");"
+        ]
+    },
+    "english_characters": {}
+}

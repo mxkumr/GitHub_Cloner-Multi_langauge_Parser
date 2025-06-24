@@ -1,0 +1,38 @@
+{
+    "repository_summary": {
+        "repository_url": "https://github.com/uhbif19/pyramid-russian-docs",
+        "repository_name": "pyramid-russian-docs",
+        "total_files": 52,
+        "analyzed_files": 52,
+        "total_elements": 3984,
+        "language_distribution": {
+            "python": 52
+        }
+    },
+    "detected_scripts": [
+        "Cyrillic"
+    ],
+    "non_english_characters": {
+        "literals": [
+            "Всего строк : %d",
+            "Не переведено : %d",
+            "Процент переведенного (по файлам) : %d%%",
+            "Процент переведенного (по строкам) : %d%%",
+            "Переведено : %d",
+            "Всего файлов : %d"
+        ],
+        "comments": [
+            "Все файлы текущего каталога (рекурсивно обходя подпапки)",
+            "Статистика по файлам",
+            "Статистика по строкам",
+            "Все файлы для перевода"
+        ],
+        "docstrings": [
+            " Считаем строки в файле. ",
+            " Рекрусивно обходим вложенные файлы, выдаем полный относительный путь. ",
+            " Преобразует дерево (много вложенных списков) в список. ",
+            " Считаем строки в файлАХ. "
+        ]
+    },
+    "english_characters": {}
+}

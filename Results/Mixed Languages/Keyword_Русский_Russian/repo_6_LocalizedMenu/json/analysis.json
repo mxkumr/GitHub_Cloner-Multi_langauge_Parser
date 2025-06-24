@@ -1,0 +1,15 @@
+{
+    "repository_summary": {
+        "repository_url": "https://github.com/zam1024t/LocalizedMenu",
+        "repository_name": "LocalizedMenu",
+        "total_files": 1,
+        "analyzed_files": 1,
+        "total_elements": 433,
+        "language_distribution": {
+            "python": 1
+        }
+    },
+    "detected_scripts": [],
+    "non_english_characters": {},
+    "english_characters": {}
+}

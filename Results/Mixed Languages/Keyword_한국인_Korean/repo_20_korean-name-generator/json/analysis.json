@@ -1,0 +1,15 @@
+{
+    "repository_summary": {
+        "repository_url": "https://github.com/smgal/korean-name-generator",
+        "repository_name": "korean-name-generator",
+        "total_files": 2,
+        "analyzed_files": 1,
+        "total_elements": 88,
+        "language_distribution": {
+            "cpp": 1
+        }
+    },
+    "detected_scripts": [],
+    "non_english_characters": {},
+    "english_characters": {}
+}

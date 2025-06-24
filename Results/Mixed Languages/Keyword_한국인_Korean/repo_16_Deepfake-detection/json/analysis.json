@@ -1,0 +1,40 @@
+{
+    "repository_summary": {
+        "repository_url": "https://github.com/heebin1201/Deepfake-detection",
+        "repository_name": "Deepfake-detection",
+        "total_files": 67,
+        "analyzed_files": 67,
+        "total_elements": 27283,
+        "language_distribution": {
+            "python": 67
+        }
+    },
+    "detected_scripts": [
+        "Hangul (Korean)",
+        "CJK Unified Ideographs",
+        "Other Non-English"
+    ],
+    "non_english_characters": {
+        "docstrings": [
+            "\r\nAuthor: Andreas Rössler\r\n"
+        ],
+        "literals": [
+            "분석결과 대기중..",
+            "분석할 영상을 입력해주세요",
+            "f'분석결과 : {\"Fake\" if result > 50 else \"Real\"}",
+            "분석하기",
+            "f\"⚠️ WARNING: code is out of date by {n} {'commits' if n > 1 else 'commmit'}. ",
+            "[|@#!¡·$€%&()=?¿^*;:,¨´><+]",
+            "f'up to date with {url} ✅"
+        ],
+        "comments": [
+            "초기화를 나중에 수행하기 위해 None으로 초기화",
+            "左右镜像的时候，左眼、右眼，　左嘴角、右嘴角无法区分, 应该交换位置，便于网络学习",
+            "见 release",
+            "storage 저장",
+            "이미 초기화되었는지 확인",
+            "应该是关键点的坐标除以anch的宽高才对，便于模型学习。使用gwh会导致不同关键点的编码不同，没有统一的参考标准"
+        ]
+    },
+    "english_characters": {}
+}

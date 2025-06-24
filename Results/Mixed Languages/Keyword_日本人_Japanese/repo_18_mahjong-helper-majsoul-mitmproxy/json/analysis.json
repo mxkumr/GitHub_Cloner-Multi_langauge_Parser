@@ -1,0 +1,48 @@
+{
+    "repository_summary": {
+        "repository_url": "https://github.com/Avenshy/mahjong-helper-majsoul-mitmproxy",
+        "repository_name": "mahjong-helper-majsoul-mitmproxy",
+        "total_files": 3,
+        "analyzed_files": 3,
+        "total_elements": 35731,
+        "language_distribution": {
+            "python": 3
+        }
+    },
+    "detected_scripts": [
+        "CJK Unified Ideographs"
+    ],
+    "non_english_characters": {
+        "literals": [
+            "f'''已载入配置：\\n\r\n    SEND_METHOD: {SEND_METHOD}\\n\r\n    SEND_ACTION: {SEND_ACTION}\\n\r\n    API_URL: {API_URL}",
+            "f'已发送：{data[\"liqi\"]}",
+            "f'接收到：{result}",
+            "f'已发送：{data}"
+        ],
+        "comments": [
+            "解析一局的WS消息队列",
+            "解析剩余报文结构",
+            "所以干脆发一个假的，反正也用不到",
+            "小端序解析报文编号(0~255)",
+            "小助手的地址",
+            "'.lq.ActionPrototype'中，需要发送给小助手的action",
+            "需要发送给小助手的method",
+            "重新进入对局时",
+            "通信报文类型",
+            "当前总共解析的包数量",
+            "parse一帧WS flow msg，要求按顺序parse",
+            "这里也是假md5，理由同上",
+            "补发立直消息",
+            "禁用urllib3安全警告",
+            "在捕获到WebSocket消息时触发",
+            "解析proto消息",
+            "导入配置",
+            "捕获websocket数据并解析雀魂\"动作\"语义为Json",
+            "雀魂弃用了md5改用sha256，但没有该字段会导致小助手无法解析牌局，也不能留空"
+        ],
+        "docstrings": [
+            "\r\n    dump the struct of protobuf,观察报文结构\r\n    buf: protobuf bytes\r\n    "
+        ]
+    },
+    "english_characters": {}
+}

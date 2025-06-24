@@ -1,0 +1,39 @@
+{
+    "repository_summary": {
+        "repository_url": "https://github.com/cirosantilli/cirosantilli",
+        "repository_name": "cirosantilli",
+        "total_files": 1,
+        "analyzed_files": 1,
+        "total_elements": 221,
+        "language_distribution": {
+            "javascript": 1
+        }
+    },
+    "detected_scripts": [
+        "CJK Unified Ideographs"
+    ],
+    "non_english_characters": {
+        "literals": [
+            "垃圾",
+            "中华人民共和国万岁",
+            "死",
+            "婊子",
+            "操你",
+            "傻",
+            "(sha|沙|啥|煞)(b|bi|diao|雕|比|笔)",
+            "中国共产党万岁",
+            "尼玛",
+            "脑瘫",
+            "你",
+            "丑",
+            "狗",
+            "司马",
+            "技术",
+            "恶心",
+            "智障",
+            "(叼|去|日|操|草)(你|泥|拟)",
+            "(马|吗|妈|m)"
+        ]
+    },
+    "english_characters": {}
+}

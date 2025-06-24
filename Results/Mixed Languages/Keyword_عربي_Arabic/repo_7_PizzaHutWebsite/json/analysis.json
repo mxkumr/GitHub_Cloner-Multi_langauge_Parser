@@ -1,0 +1,21 @@
+{
+    "repository_summary": {
+        "repository_url": "https://github.com/MohamedZakria246/PizzaHutWebsite",
+        "repository_name": "PizzaHutWebsite",
+        "total_files": 3,
+        "analyzed_files": 3,
+        "total_elements": 3571,
+        "language_distribution": {
+            "python": 3
+        }
+    },
+    "detected_scripts": [
+        "Arabic"
+    ],
+    "non_english_characters": {
+        "comments": [
+            "SeniorCitizen و tenure و MonthlyCharges"
+        ]
+    },
+    "english_characters": {}
+}

@@ -296,8 +296,26 @@ def main():
     
     # Example repositories to parse
     repos = [
-        "https://github.com/mxkumr/test_case_parser",
-        #"https://github.com/leifengwl/MoGuDing-Auto",
+        "https://github.com/fighting41love/funNLP",
+        "https://github.com/modood/Administrative-divisions-of-China",
+        "https://github.com/cxasm/notepad--",
+        "https://github.com/xiangyuecn/AreaCity-JsSpider-StatsGov",
+        "https://github.com/mumuy/data_location",
+        "https://github.com/doublechaintech/scm-biz-suite",
+        "https://github.com/BinNong/meet-libai",
+        "https://github.com/cn/GB2260",
+        "https://github.com/mc-zone/IDValidator",
+        "https://github.com/atguigu01/Shopping",
+        "https://github.com/LCTT/LCBot",
+        "https://github.com/alantang1977/X",
+        "https://github.com/ethan-li-coding/AD-Census",
+        "https://github.com/jxlwqq/id-validator.py",
+        "https://github.com/yxcs/poems-db",
+        "https://github.com/lichao315/Calendar",
+        "https://github.com/risesoft-y9/Network-Drive",
+        "https://github.com/GuidoPaul/CAIL2019",
+        "https://github.com/chenluyong/OEasyScreenshot",
+        "https://github.com/Tele-AI/TeleChat2",
     ]
     
     for repo_url in repos:

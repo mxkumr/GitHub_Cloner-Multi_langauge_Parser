@@ -1,0 +1,15 @@
+{
+    "repository_summary": {
+        "repository_url": "https://github.com/JiaqiLi404/IAmDirector-Text2Video-NextJS-Client",
+        "repository_name": "IAmDirector-Text2Video-NextJS-Client",
+        "total_files": 74,
+        "analyzed_files": 74,
+        "total_elements": 5581,
+        "language_distribution": {
+            "javascript": 74
+        }
+    },
+    "detected_scripts": [],
+    "non_english_characters": {},
+    "english_characters": {}
+}

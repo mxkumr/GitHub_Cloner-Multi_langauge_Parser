@@ -1,0 +1,21 @@
+{
+    "repository_summary": {
+        "repository_url": "https://github.com/choco9966/Korean-Hair-Segmentation",
+        "repository_name": "Korean-Hair-Segmentation",
+        "total_files": 10,
+        "analyzed_files": 10,
+        "total_elements": 2761,
+        "language_distribution": {
+            "python": 10
+        }
+    },
+    "detected_scripts": [
+        "Hangul (Korean)"
+    ],
+    "non_english_characters": {
+        "comments": [
+            "적용하는 숫자가 커질 수록 Point의 갯수는 감소"
+        ]
+    },
+    "english_characters": {}
+}

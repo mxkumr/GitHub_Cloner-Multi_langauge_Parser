@@ -1,0 +1,38 @@
+{
+    "repository_summary": {
+        "repository_url": "https://github.com/level99rabbit/is-korean-name",
+        "repository_name": "is-korean-name",
+        "total_files": 7,
+        "analyzed_files": 7,
+        "total_elements": 278,
+        "language_distribution": {
+            "python": 7
+        }
+    },
+    "detected_scripts": [
+        "Hangul (Korean)"
+    ],
+    "non_english_characters": {
+        "literals": [
+            "정확도: {0:.4f}, AUC:{4:.4f}, 정밀도: {1:.4f}, 재현율: {2:.4f}, F1: {3:.4f}",
+            "f'\"{name}\" 은/는 외국인 이름입니다.",
+            "k-폴드",
+            "오차 행렬",
+            "f'\"{name}\" 은/는 한국인 이름입니다."
+        ],
+        "comments": [
+            "훈련 데이터, 테스트 데이터 분리",
+            "저장",
+            "1 = 한국인 이름",
+            "name 설정",
+            "평가",
+            "label 설정",
+            "dataframe 만들기",
+            "파이프라인 만들기",
+            "훈련 시키기",
+            "0 = 외국인 이름",
+            "평가 (kfold)"
+        ]
+    },
+    "english_characters": {}
+}

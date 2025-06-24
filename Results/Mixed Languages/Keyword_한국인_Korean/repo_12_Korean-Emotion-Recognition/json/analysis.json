@@ -1,0 +1,21 @@
+{
+    "repository_summary": {
+        "repository_url": "https://github.com/MyCompetition/Korean-Emotion-Recognition",
+        "repository_name": "Korean-Emotion-Recognition",
+        "total_files": 9,
+        "analyzed_files": 9,
+        "total_elements": 1164,
+        "language_distribution": {
+            "python": 9
+        }
+    },
+    "detected_scripts": [
+        "Hangul (Korean)"
+    ],
+    "non_english_characters": {
+        "comments": [
+            "test_label과 submission의 Id가 게 정리"
+        ]
+    },
+    "english_characters": {}
+}

@@ -1,0 +1,34 @@
+{
+    "repository_summary": {
+        "repository_url": "https://github.com/ilyachch/django-rest-framework-rusdoc",
+        "repository_name": "django-rest-framework-rusdoc",
+        "total_files": 2,
+        "analyzed_files": 2,
+        "total_elements": 598,
+        "language_distribution": {
+            "python": 2
+        }
+    },
+    "detected_scripts": [
+        "Cyrillic"
+    ],
+    "non_english_characters": {
+        "comments": [
+            "Создаем коммит",
+            "Измененные файлы (не в .reference)",
+            "Удаленные файлы в .reference",
+            "Добавляем файлы в индекс",
+            "Находим пары файлов",
+            "Формат вывода git status --porcelain:",
+            "XY PATH или XY \"PATH с пробелами\""
+        ],
+        "docstrings": [
+            "Выполняет команду и возвращает результат",
+            "Разбирает строку статуса git и возвращает FileStatus",
+            "\r\n    Находит пары файлов:\r\n    - измененный файл в корне\r\n    - удаленный файл в .reference с тем же относительным путем\r\n    ",
+            "Создает коммит для пары файлов",
+            "Получает статус git в формате porcelain"
+        ]
+    },
+    "english_characters": {}
+}

@@ -1,0 +1,15 @@
+{
+    "repository_summary": {
+        "repository_url": "https://github.com/learn-it-in-russian/tldr-ru",
+        "repository_name": "tldr-ru",
+        "total_files": 1,
+        "analyzed_files": 1,
+        "total_elements": 95,
+        "language_distribution": {
+            "python": 1
+        }
+    },
+    "detected_scripts": [],
+    "non_english_characters": {},
+    "english_characters": {}
+}

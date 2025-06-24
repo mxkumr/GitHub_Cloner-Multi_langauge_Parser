@@ -1,0 +1,17 @@
+{
+    "repository_summary": {
+        "repository_url": "https://github.com/Cr4sh/MicroBackdoor",
+        "repository_name": "MicroBackdoor",
+        "total_files": 22,
+        "analyzed_files": 22,
+        "total_elements": 7596,
+        "language_distribution": {
+            "python": 6,
+            "cpp": 13,
+            "javascript": 3
+        }
+    },
+    "detected_scripts": [],
+    "non_english_characters": {},
+    "english_characters": {}
+}
